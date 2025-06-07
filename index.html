@@ -25,11 +25,16 @@
             headers: myHeaders,
             body: raw
         })
-        .then(res => res.json())
+        .then(res => {
+            console.log('Response status:', res.status);
+            return res.json();
+        })
         .then(data => {
+            console.log('Cart created:', data);
             window.location.href = CHECKOUT_URI + data._id + '?start=signup';
         })
         .catch(error => {
+            console.error('Error:', error);
             document.body.innerHTML = '<p>Error: ' + error.message + '</p>';
         });
     </script>
